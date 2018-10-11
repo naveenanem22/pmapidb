@@ -11,6 +11,9 @@ CREATE TABLE candidateemploymenthistory(
     ceh_nature_of_employment VARCHAR(10),
     ceh_reason_for_leaving VARCHAR(100),
     ceh_employee_code VARCHAR(10),
+	ceh_supervisor_designation VARCHAR(20),
+	ceh_supervisor_email VARCHAR(40),
+	ceh_supervisor_name VARCHAR(45),
     CONSTRAINT pk_candidateemploymenthistory PRIMARY KEY(ceh_cdt_id, ceh_company_name, ceh_start_date),
     CONSTRAINT fk_ceh_cdt_id_ref_cdt_id FOREIGN KEY(ceh_cdt_id) REFERENCES candidate(cdt_id)
     );
