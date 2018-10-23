@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS candidate;
 CREATE TABLE candidate (
-    cdt_id VARCHAR(10) NOT NULL UNIQUE,
+    cdt_id INT(6) NOT NULL UNIQUE,
     cdt_first_name VARCHAR(45) NOT NULL,
     cdt_last_name VARCHAR(45),
     cdt_email VARCHAR(45),
