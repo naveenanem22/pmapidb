@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS candidateeducation;
 CREATE TABLE candidateeducation (
 	ce_id INT(6) NOT NULL UNIQUE,
-	ce_cdt_id INT(6) NOT NULL UNIQUE,
+	ce_cdt_id INT(6) NOT NULL,
     ce_qualification_name VARCHAR(50),
     ce_start_date DATE,
     ce_end_date DATE,
