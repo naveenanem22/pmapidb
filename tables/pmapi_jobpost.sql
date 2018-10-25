@@ -1,11 +1,11 @@
 DROP TABLE IF EXISTS jobpost;
 CREATE TABLE jobpost (
-    jp_id VARCHAR(10) NOT NULL,
+    jp_id INT(6) NOT NULL UNIQUE,
     jp_job_title VARCHAR(45),
     jp_location VARCHAR(45),
     jp_roles TEXT,
     jp_number_of_vacancies INT(3),
-    jp_hiring_manager_employee_id VARCHAR(10),
+    jp_hiring_manager_employee_id INT(6) NOT NULL,
     jp_department_id VARCHAR(10),
     jp_overview TEXT,
     jp_responsibilities TEXT,
