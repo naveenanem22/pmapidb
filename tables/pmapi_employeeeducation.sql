@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS employeeeducation;
 CREATE TABLE employeeeducation (
-  ee_id VARCHAR(11) NOT NULL UNIQUE,
-  ee_emp_id VARCHAR(45),
+  ee_id INT(6) NOT NULL UNIQUE,
+  ee_emp_id INT(6),
   ee_qualname VARCHAR(45),
   ee_start_date DATE,
   ee_end_date DATE,
