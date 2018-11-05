@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS individualaddress;
 CREATE TABLE individualaddress (
-    ia_id INT(6) NOT NULL UNIQUE,
+    ia_id INT(6) NOT NULL UNIQUE AUTO_INCREMENT,
     ia_street_name VARCHAR(45) NOT NULL,
     ia_building_number VARCHAR(45),
     ia_city VARCHAR(45),

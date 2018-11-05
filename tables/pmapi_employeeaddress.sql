@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS employeeaddress;
 CREATE TABLE employeeaddress (
-    empaddr_id INT(6) NOT NULL UNIQUE,
+    empaddr_id INT(6) NOT NULL UNIQUE AUTO_INCREMENT,
     empaddr_ia_id INT(6) NOT NULL,
 	empaddr_emp_id INT(6) NOT NULL,	
     CONSTRAINT pk_employeeaddress PRIMARY KEY (empaddr_id),
