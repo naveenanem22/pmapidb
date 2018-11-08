@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS task;
 CREATE TABLE task (
-	tsk_id INT(6) NOT NULL UNIQUE,
+	tsk_id INT(6) NOT NULL UNIQUE AUTO_INCREMENT,
 	tsk_prj_id INT(6) NOT NULL,
 	tsk_name VARCHAR(100) NOT NULL,
 	tsk_description VARCHAR(2000),
