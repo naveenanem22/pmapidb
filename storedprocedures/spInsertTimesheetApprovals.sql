@@ -4,7 +4,8 @@ CREATE PROCEDURE spInsertTimesheetApprovals(
 IN in_tmsht_id_list VARCHAR(1000), 
 IN in_mgr_emp_id_list VARCHAR(1000),
 IN in_tmsht_id_count INT,
-IN in_mgr_emp_id_count INT
+IN in_mgr_emp_id_count INT,
+OUT out_result BOOLEAN
 )
 BLOCK1: BEGIN
 -- Temporary variables for outer loop: tmsht_id_loop
@@ -41,5 +42,6 @@ IF tmsht_id_counter = in_tmsht_id_count THEN
    END IF;
 
 END LOOP tmsht_id_loop;
+SET out_result = 1;
 END BLOCK1 $$
 DELIMITER ;
