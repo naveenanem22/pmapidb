@@ -12,5 +12,8 @@ CREATE TABLE project (
 	prj_created_date TIMESTAMP,
 	prj_updated_date TIMESTAMP,  
 	prj_status VARCHAR(20),
-    CONSTRAINT pk_project PRIMARY KEY (prj_id)
+	prj_cust_id INT(6),
+    CONSTRAINT pk_project PRIMARY KEY (prj_id),
+	CONSTRAINT fk_prj_cust_id_ref_cust_id FOREIGN KEY(prj_cust_id) customer (cust_id)
+	
 );
