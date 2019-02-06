@@ -7,7 +7,7 @@ CREATE TABLE ticket (
 	tkt_pty_id INT(6) NOT NULL,
 	tkt_tkttype_id INT(6) NOT NULL,
 	tkt_svctype_id INT(6) NOT NULL,
-	tkt_created_by VARCHAR(30) NOT NULL,
+	tkt_created_by INT(6) NOT NULL,
 	tkt_sts_id INT(6) NOT NULL,
 	tkt_created_date TIMESTAMP,
 	tkt_updated_date TIMESTAMP,
@@ -16,5 +16,6 @@ CREATE TABLE ticket (
 	CONSTRAINT fk_tkt_svctype_id_ref_svctype_id FOREIGN KEY (tkt_svctype_id) REFERENCES servicetype(svctype_id),
 	CONSTRAINT fk_tkt_pty_id_ref_pty_id FOREIGN KEY (tkt_pty_id) REFERENCES priority(pty_id),
 	CONSTRAINT fk_tkt_tkttype_id_ref_tkttype_id FOREIGN KEY (tkt_tkttype_id) REFERENCES tickettype(tkttype_id),
-	CONSTRAINT fk_tkt_sts_id_ref_sts_id FOREIGN KEY (tkt_sts_id) REFERENCES status(sts_id)
+	CONSTRAINT fk_tkt_sts_id_ref_sts_id FOREIGN KEY (tkt_sts_id) REFERENCES status(sts_id),
+	CONSTRAINT fk_tkt_created_by_ref_u_id FOREIGN KEY (tkt_created_by) REFERENCES user(u_id)
 );
