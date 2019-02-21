@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS ticketconversation;
 CREATE TABLE ticketconversation (
-	tktconv_id INT(6) NOT NULL UNIQUE,
+	tktconv_id INT(6) NOT NULL UNIQUE AUTO_INCREMENT,
 	tktconv_tkt_id INT(6) NOT NULL,
     tktconv_author INT(6) NOT NULL,
     tktconv_message VARCHAR(500),
