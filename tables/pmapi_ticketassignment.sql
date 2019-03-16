@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS ticketassignment;
 CREATE TABLE ticketassignment (
-    ta_id INT(6) NOT NULL UNIQUE,
+    ta_id INT(6) NOT NULL UNIQUE AUTO_INCREMENT,
     ta_tkt_id INT(6) NOT NULL,
 	ta_assigned_to INT(6) NOT NULL,
 	ta_created_date TIMESTAMP,	    
