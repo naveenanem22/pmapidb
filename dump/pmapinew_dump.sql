@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `pmapinew` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+CREATE DATABASE  IF NOT EXISTS `pmapinew` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 USE `pmapinew`;
--- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
 -- Host: localhost    Database: pmapinew
 -- ------------------------------------------------------
--- Server version	8.0.14
+-- Server version	5.7.25-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,19 +26,19 @@ DROP TABLE IF EXISTS `candidate`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `candidate` (
   `cdt_id` int(6) NOT NULL,
-  `cdt_first_name` varchar(45) NOT NULL,
-  `cdt_last_name` varchar(45) DEFAULT NULL,
-  `cdt_email` varchar(45) DEFAULT NULL,
-  `cdt_passport` varchar(10) DEFAULT NULL,
-  `cdt_last_designation` varchar(45) DEFAULT NULL,
+  `cdt_first_name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cdt_last_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cdt_email` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cdt_passport` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cdt_last_designation` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cdt_date_of_birth` date DEFAULT NULL,
-  `cdt_gender` varchar(10) DEFAULT NULL,
-  `cdt_marital_status` varchar(15) DEFAULT NULL,
+  `cdt_gender` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cdt_marital_status` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cdt_created_date` timestamp NULL DEFAULT NULL,
   `cdt_updated_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`cdt_id`),
   UNIQUE KEY `cdt_id` (`cdt_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,18 +61,18 @@ DROP TABLE IF EXISTS `candidateeducation`;
 CREATE TABLE `candidateeducation` (
   `ce_id` int(6) NOT NULL,
   `ce_cdt_id` int(6) NOT NULL,
-  `ce_qualification_name` varchar(50) DEFAULT NULL,
+  `ce_qualification_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ce_start_date` date DEFAULT NULL,
   `ce_end_date` date DEFAULT NULL,
   `ce_score` float DEFAULT NULL,
-  `ce_score_type` varchar(10) DEFAULT NULL,
-  `ce_institution` varchar(40) DEFAULT NULL,
-  `ce_specialization` varchar(40) DEFAULT NULL,
+  `ce_score_type` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ce_institution` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ce_specialization` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ce_id`),
   UNIQUE KEY `ce_id` (`ce_id`),
   KEY `fk_ce_cdt_id_ref_cdt_id` (`ce_cdt_id`),
   CONSTRAINT `fk_ce_cdt_id_ref_cdt_id` FOREIGN KEY (`ce_cdt_id`) REFERENCES `candidate` (`cdt_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,24 +94,24 @@ DROP TABLE IF EXISTS `candidateemploymenthistory`;
 CREATE TABLE `candidateemploymenthistory` (
   `ceh_id` int(6) NOT NULL,
   `ceh_cdt_id` int(6) NOT NULL,
-  `ceh_company_name` varchar(45) DEFAULT NULL,
+  `ceh_company_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ceh_total_experience_in_months` int(11) DEFAULT NULL,
   `ceh_start_date` date DEFAULT NULL,
   `ceh_end_date` date DEFAULT NULL,
   `ceh_relevant_experience_in_months` int(11) DEFAULT NULL,
-  `ceh_designation` varchar(10) DEFAULT NULL,
+  `ceh_designation` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ceh_remuneration` decimal(10,2) DEFAULT NULL,
-  `ceh_nature_of_employment` varchar(10) DEFAULT NULL,
-  `ceh_reason_for_leaving` varchar(100) DEFAULT NULL,
-  `ceh_employee_code` varchar(10) DEFAULT NULL,
-  `ceh_supervisor_designation` varchar(20) DEFAULT NULL,
-  `ceh_supervisor_email` varchar(40) DEFAULT NULL,
-  `ceh_supervisor_name` varchar(45) DEFAULT NULL,
+  `ceh_nature_of_employment` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ceh_reason_for_leaving` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ceh_employee_code` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ceh_supervisor_designation` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ceh_supervisor_email` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ceh_supervisor_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ceh_id`),
   UNIQUE KEY `ceh_id` (`ceh_id`),
   KEY `fk_ceh_cdt_id_ref_cdt_id` (`ceh_cdt_id`),
   CONSTRAINT `fk_ceh_cdt_id_ref_cdt_id` FOREIGN KEY (`ceh_cdt_id`) REFERENCES `candidate` (`cdt_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,11 +132,11 @@ DROP TABLE IF EXISTS `company`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `company` (
   `comp_id` int(6) NOT NULL,
-  `comp_name` varchar(75) NOT NULL,
+  `comp_name` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`comp_id`),
   UNIQUE KEY `comp_id` (`comp_id`),
   UNIQUE KEY `comp_name` (`comp_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,20 +158,20 @@ DROP TABLE IF EXISTS `customer`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `customer` (
   `cust_id` int(6) NOT NULL AUTO_INCREMENT,
-  `cust_name` varchar(100) NOT NULL,
-  `cust_customer_id` varchar(100) NOT NULL,
-  `cust_service_type` varchar(45) DEFAULT NULL,
-  `cust_description` varchar(2000) DEFAULT NULL,
+  `cust_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cust_customer_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cust_service_type` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cust_description` varchar(2000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cust_planned_start_date` date DEFAULT NULL,
   `cust_planned_end_date` date DEFAULT NULL,
   `cust_actual_start_date` date DEFAULT NULL,
   `cust_actual_end_date` date DEFAULT NULL,
   `cust_created_date` timestamp NULL DEFAULT NULL,
   `cust_updated_date` timestamp NULL DEFAULT NULL,
-  `cust_status` varchar(20) DEFAULT NULL,
+  `cust_status` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`cust_id`),
   UNIQUE KEY `cust_id` (`cust_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,11 +193,11 @@ DROP TABLE IF EXISTS `department`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `department` (
   `dept_id` int(6) NOT NULL,
-  `dept_name` varchar(75) NOT NULL,
+  `dept_name` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`dept_id`),
   UNIQUE KEY `dept_id` (`dept_id`),
   UNIQUE KEY `dept_name` (`dept_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,16 +219,16 @@ DROP TABLE IF EXISTS `employee`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `employee` (
   `emp_id` int(6) NOT NULL,
-  `emp_firstname` varchar(45) DEFAULT NULL,
-  `emp_lastname` varchar(45) DEFAULT NULL,
-  `emp_gender` varchar(45) DEFAULT NULL,
+  `emp_firstname` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `emp_lastname` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `emp_gender` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `emp_dob` date DEFAULT NULL,
-  `emp_maritalstatus` varchar(45) DEFAULT NULL,
+  `emp_maritalstatus` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `emp_createddate` timestamp NULL DEFAULT NULL,
   `emp_updateddate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`emp_id`),
   UNIQUE KEY `emp_id` (`emp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +258,7 @@ CREATE TABLE `employeeaddress` (
   KEY `fk_empaddr_emp_id_ref_emp_id` (`empaddr_emp_id`),
   CONSTRAINT `fk_empaddr_emp_id_ref_emp_id` FOREIGN KEY (`empaddr_emp_id`) REFERENCES `employee` (`emp_id`),
   CONSTRAINT `fk_empaddr_paddr_id_ref_paddr_id` FOREIGN KEY (`empaddr_ia_id`) REFERENCES `individualaddress` (`ia_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -281,18 +281,18 @@ DROP TABLE IF EXISTS `employeeeducation`;
 CREATE TABLE `employeeeducation` (
   `ee_id` int(6) NOT NULL,
   `ee_emp_id` int(6) DEFAULT NULL,
-  `ee_qualname` varchar(45) DEFAULT NULL,
+  `ee_qualname` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ee_start_date` date DEFAULT NULL,
   `ee_end_date` date DEFAULT NULL,
   `ee_score` float DEFAULT NULL,
-  `ee_score_type` varchar(45) DEFAULT NULL,
-  `ee_institution` varchar(45) DEFAULT NULL,
-  `ee_specialization` varchar(45) DEFAULT NULL,
+  `ee_score_type` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ee_institution` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ee_specialization` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ee_id`),
   UNIQUE KEY `ee_id` (`ee_id`),
   KEY `fk_ee_emp_id_ref_emp_id` (`ee_emp_id`),
   CONSTRAINT `fk_ee_emp_id_ref_emp_id` FOREIGN KEY (`ee_emp_id`) REFERENCES `employee` (`emp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,7 +314,7 @@ DROP TABLE IF EXISTS `employeepassport`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `employeepassport` (
   `epp_id` int(6) NOT NULL,
-  `epp_number` varchar(45) NOT NULL,
+  `epp_number` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `epp_date_of_issue` date DEFAULT NULL,
   `epp_date_of_expiry` date DEFAULT NULL,
   `epp_emp_id` int(6) DEFAULT NULL,
@@ -322,7 +322,7 @@ CREATE TABLE `employeepassport` (
   UNIQUE KEY `epp_id` (`epp_id`),
   KEY `fk_epp_emp_id_ref_emp_id` (`epp_emp_id`),
   CONSTRAINT `fk_epp_emp_id_ref_emp_id` FOREIGN KEY (`epp_emp_id`) REFERENCES `employee` (`emp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -344,27 +344,27 @@ DROP TABLE IF EXISTS `employeeprevemployment`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `employeeprevemployment` (
   `epe_id` int(6) NOT NULL,
-  `epe_company_name` varchar(75) DEFAULT NULL,
+  `epe_company_name` varchar(75) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `epe_emp_id` int(6) DEFAULT NULL,
   `epe_total_experience_in_months` int(11) DEFAULT NULL,
   `epe_start_date` date DEFAULT NULL,
   `epe_end_date` date DEFAULT NULL,
   `epe_relevant_experience_in_months` int(11) DEFAULT NULL,
-  `epe_designation` varchar(45) DEFAULT NULL,
+  `epe_designation` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `epe_remuneration` decimal(20,2) DEFAULT NULL,
-  `epe_nature_of_employment` varchar(45) DEFAULT NULL,
-  `epe_supervisor_name` varchar(45) DEFAULT NULL,
-  `epe_supervisor_designation` varchar(45) DEFAULT NULL,
-  `epe_reason_for_leaving` varchar(45) DEFAULT NULL,
-  `epe_supervisor_emailid` varchar(45) DEFAULT NULL,
-  `epe_employee_code` varchar(45) DEFAULT NULL,
+  `epe_nature_of_employment` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `epe_supervisor_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `epe_supervisor_designation` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `epe_reason_for_leaving` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `epe_supervisor_emailid` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `epe_employee_code` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`epe_id`),
   UNIQUE KEY `epe_id` (`epe_id`),
   KEY `fk_epe_emp_id_ref_emp_id` (`epe_emp_id`),
   KEY `fk_epe_company_name_ref_comp_name` (`epe_company_name`),
   CONSTRAINT `fk_epe_company_name_ref_comp_name` FOREIGN KEY (`epe_company_name`) REFERENCES `company` (`comp_name`),
   CONSTRAINT `fk_epe_emp_id_ref_emp_id` FOREIGN KEY (`epe_emp_id`) REFERENCES `employee` (`emp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -395,7 +395,7 @@ CREATE TABLE `employeeskill` (
   KEY `fk_es_skl_id_ref_skl_id` (`es_skl_id`),
   CONSTRAINT `fk_es_emp_id_ref_emp_id` FOREIGN KEY (`es_emp_id`) REFERENCES `employee` (`emp_id`),
   CONSTRAINT `fk_es_skl_id_ref_skl_id` FOREIGN KEY (`es_skl_id`) REFERENCES `skill` (`skl_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -417,8 +417,8 @@ DROP TABLE IF EXISTS `employeevisa`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `employeevisa` (
   `empvsa_id` int(6) NOT NULL,
-  `empvsa_country` varchar(45) DEFAULT NULL,
-  `empvsa_type` varchar(45) DEFAULT NULL,
+  `empvsa_country` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `empvsa_type` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `empvsa_valid_till` date DEFAULT NULL,
   `empvsa_emp_id` int(6) DEFAULT NULL,
   `empvsa_valid_from` date DEFAULT NULL,
@@ -426,7 +426,7 @@ CREATE TABLE `employeevisa` (
   UNIQUE KEY `empvsa_id` (`empvsa_id`),
   KEY `fk_empvsa_emp_id_ref_emp_id` (`empvsa_emp_id`),
   CONSTRAINT `fk_empvsa_emp_id_ref_emp_id` FOREIGN KEY (`empvsa_emp_id`) REFERENCES `employee` (`emp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -448,19 +448,19 @@ DROP TABLE IF EXISTS `individualaddress`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `individualaddress` (
   `ia_id` int(6) NOT NULL AUTO_INCREMENT,
-  `ia_street_name` varchar(45) NOT NULL,
-  `ia_building_number` varchar(45) DEFAULT NULL,
-  `ia_city` varchar(45) DEFAULT NULL,
-  `ia_state` varchar(45) DEFAULT NULL,
-  `ia_country` varchar(45) DEFAULT NULL,
+  `ia_street_name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ia_building_number` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ia_city` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ia_state` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ia_country` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ia_postal_code` int(10) DEFAULT NULL,
-  `ia_addr_line_1` varchar(120) DEFAULT NULL,
-  `ia_addr_line_2` varchar(120) DEFAULT NULL,
-  `ia_addr_line_3` varchar(120) DEFAULT NULL,
-  `ia_addr_type` varchar(45) DEFAULT NULL,
+  `ia_addr_line_1` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ia_addr_line_2` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ia_addr_line_3` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ia_addr_type` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ia_id`),
   UNIQUE KEY `ia_id` (`ia_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -485,15 +485,15 @@ CREATE TABLE `interview` (
   `intvw_jc_id` int(6) NOT NULL,
   `intvw_starttime_of_interview` timestamp NULL DEFAULT NULL,
   `intvw_endtime_of_interview` timestamp NULL DEFAULT NULL,
-  `intvw_level_of_interview` varchar(15) NOT NULL,
-  `intvw_type_of_inteview` varchar(15) NOT NULL,
-  `intvw_interview_status` varchar(15) NOT NULL,
-  `intvw_notes` varchar(500) NOT NULL,
+  `intvw_level_of_interview` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `intvw_type_of_inteview` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `intvw_interview_status` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `intvw_notes` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`intvw_id`),
   UNIQUE KEY `intvw_id` (`intvw_id`),
   KEY `fk_intvw_jc_id_ref_jc_id` (`intvw_jc_id`),
   CONSTRAINT `fk_intvw_jc_id_ref_jc_id` FOREIGN KEY (`intvw_jc_id`) REFERENCES `jobcandidate` (`jc_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -514,11 +514,11 @@ DROP TABLE IF EXISTS `itshelpdeskattachment`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `itshelpdeskattachment` (
   `ihda_id` int(6) NOT NULL AUTO_INCREMENT,
-  `ihda_name` varchar(75) NOT NULL,
+  `ihda_name` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`ihda_id`),
   UNIQUE KEY `ihda_id` (`ihda_id`),
   UNIQUE KEY `ihda_name` (`ihda_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -542,15 +542,15 @@ CREATE TABLE `jobcandidate` (
   `jc_id` int(6) NOT NULL,
   `jc_jp_id` int(6) NOT NULL,
   `jc_cdt_id` int(6) NOT NULL,
-  `jc_stage` varchar(20) NOT NULL,
-  `jc_notes` varchar(100) DEFAULT NULL,
+  `jc_stage` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jc_notes` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`jc_id`),
   UNIQUE KEY `jc_id` (`jc_id`),
   KEY `fk_jc_jp_id_ref_jp_id` (`jc_jp_id`),
   KEY `fk_jc_cdt_id_ref_cdt_id` (`jc_cdt_id`),
   CONSTRAINT `fk_jc_cdt_id_ref_cdt_id` FOREIGN KEY (`jc_cdt_id`) REFERENCES `candidate` (`cdt_id`),
   CONSTRAINT `fk_jc_jp_id_ref_jp_id` FOREIGN KEY (`jc_jp_id`) REFERENCES `jobpost` (`jp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -571,23 +571,23 @@ DROP TABLE IF EXISTS `jobpost`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `jobpost` (
   `jp_id` int(6) NOT NULL,
-  `jp_job_title` varchar(45) DEFAULT NULL,
-  `jp_location` varchar(45) DEFAULT NULL,
-  `jp_roles` text,
+  `jp_job_title` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jp_location` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jp_roles` text COLLATE utf8mb4_unicode_ci,
   `jp_number_of_vacancies` int(3) DEFAULT NULL,
   `jp_hiring_manager_employee_id` int(6) NOT NULL,
-  `jp_department_id` varchar(10) DEFAULT NULL,
-  `jp_overview` text,
-  `jp_responsibilities` text,
-  `jp_must_have_experience` text,
-  `jp_nice_to_have_experience` text,
-  `jp_key_skills` text,
-  `jp_desired_education` text,
+  `jp_department_id` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jp_overview` text COLLATE utf8mb4_unicode_ci,
+  `jp_responsibilities` text COLLATE utf8mb4_unicode_ci,
+  `jp_must_have_experience` text COLLATE utf8mb4_unicode_ci,
+  `jp_nice_to_have_experience` text COLLATE utf8mb4_unicode_ci,
+  `jp_key_skills` text COLLATE utf8mb4_unicode_ci,
+  `jp_desired_education` text COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`jp_id`),
   UNIQUE KEY `jp_id` (`jp_id`),
   KEY `fk_jp_hiring_manager_employee_id_ref_employee_id` (`jp_hiring_manager_employee_id`),
   CONSTRAINT `fk_jp_hiring_manager_employee_id_ref_employee_id` FOREIGN KEY (`jp_hiring_manager_employee_id`) REFERENCES `employee` (`emp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -608,12 +608,12 @@ DROP TABLE IF EXISTS `priority`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `priority` (
   `pty_id` int(6) NOT NULL,
-  `pty_name` varchar(75) NOT NULL,
-  `pty_category` varchar(20) NOT NULL,
+  `pty_name` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pty_category` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`pty_id`),
   UNIQUE KEY `pty_id` (`pty_id`),
   UNIQUE KEY `pty_name` (`pty_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -635,24 +635,24 @@ DROP TABLE IF EXISTS `project`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `project` (
   `prj_id` int(6) NOT NULL AUTO_INCREMENT,
-  `prj_name` varchar(100) NOT NULL,
-  `prj_project_id` varchar(100) DEFAULT NULL,
-  `prj_service_type` varchar(45) DEFAULT NULL,
-  `prj_description` varchar(2000) DEFAULT NULL,
+  `prj_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prj_project_id` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prj_service_type` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prj_description` varchar(2000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `prj_planned_start_date` date DEFAULT NULL,
   `prj_planned_end_date` date DEFAULT NULL,
   `prj_actual_start_date` date DEFAULT NULL,
   `prj_actual_end_date` date DEFAULT NULL,
   `prj_created_date` timestamp NULL DEFAULT NULL,
   `prj_updated_date` timestamp NULL DEFAULT NULL,
-  `prj_status` varchar(20) DEFAULT NULL,
+  `prj_status` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `prj_cust_id` int(6) DEFAULT NULL,
-  `prj_notes` varchar(2000) DEFAULT NULL,
+  `prj_notes` varchar(2000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`prj_id`),
   UNIQUE KEY `prj_id` (`prj_id`),
   KEY `fk_prj_cust_id_ref_cust_id_idx` (`prj_cust_id`),
   CONSTRAINT `fk_prj_cust_id_ref_cust_id` FOREIGN KEY (`prj_cust_id`) REFERENCES `customer` (`cust_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -676,14 +676,14 @@ CREATE TABLE `resourceallocation` (
   `ra_id` int(6) NOT NULL AUTO_INCREMENT,
   `ra_emp_id` int(6) NOT NULL,
   `ra_tsk_id` int(6) NOT NULL,
-  `ra_notes` varchar(1000) DEFAULT NULL,
+  `ra_notes` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ra_id`),
   UNIQUE KEY `ra_id` (`ra_id`),
   KEY `fk_ra_emp_id_ref_emp_id` (`ra_emp_id`),
   KEY `fk_ra_tsk_id_ref_tsk_id` (`ra_tsk_id`),
   CONSTRAINT `fk_ra_emp_id_ref_emp_id` FOREIGN KEY (`ra_emp_id`) REFERENCES `employee` (`emp_id`),
   CONSTRAINT `fk_ra_tsk_id_ref_tsk_id` FOREIGN KEY (`ra_tsk_id`) REFERENCES `task` (`tsk_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -705,11 +705,11 @@ DROP TABLE IF EXISTS `servicetype`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `servicetype` (
   `svctype_id` int(6) NOT NULL,
-  `svctype_name` varchar(75) NOT NULL,
+  `svctype_name` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`svctype_id`),
   UNIQUE KEY `svctype_id` (`svctype_id`),
   UNIQUE KEY `svctype_name` (`svctype_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -731,15 +731,15 @@ DROP TABLE IF EXISTS `skill`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `skill` (
   `skl_id` int(6) NOT NULL,
-  `skl_name` varchar(45) DEFAULT NULL,
-  `skl_desc` varchar(45) DEFAULT NULL,
-  `skl_category` varchar(45) DEFAULT NULL,
+  `skl_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `skl_desc` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `skl_category` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `skl_createddate` date DEFAULT NULL,
   `skl_modifieddate` date DEFAULT NULL,
   `skl_deleted` binary(1) DEFAULT NULL,
   PRIMARY KEY (`skl_id`),
   UNIQUE KEY `skl_id` (`skl_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -761,12 +761,12 @@ DROP TABLE IF EXISTS `status`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `status` (
   `sts_id` int(6) NOT NULL,
-  `sts_name` varchar(75) NOT NULL,
-  `sts_category` varchar(75) NOT NULL,
+  `sts_name` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sts_category` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`sts_id`),
   UNIQUE KEY `sts_id` (`sts_id`),
   UNIQUE KEY `sts_name` (`sts_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -775,7 +775,7 @@ CREATE TABLE `status` (
 
 LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
-INSERT INTO `status` VALUES (1,'New','All'),(2,'Open','All'),(3,'Processing','All'),(4,'Hold','All'),(5,'Closed','All');
+INSERT INTO `status` VALUES (1,'New','All'),(2,'Open','All'),(3,'Processing','All'),(4,'Hold','All'),(5,'Closed','All'),(6,'AwaitingResponse','All');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -789,15 +789,15 @@ DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
   `tsk_id` int(6) NOT NULL AUTO_INCREMENT,
   `tsk_prj_id` int(6) NOT NULL,
-  `tsk_name` varchar(100) NOT NULL,
-  `tsk_description` varchar(2000) DEFAULT NULL,
+  `tsk_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tsk_description` varchar(2000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tsk_start_date` date NOT NULL,
   `tsk_end_date` date NOT NULL,
   PRIMARY KEY (`tsk_id`),
   UNIQUE KEY `tsk_id` (`tsk_id`),
   KEY `fk_tsk_prj_id_ref_prj_id` (`tsk_prj_id`),
   CONSTRAINT `fk_tsk_prj_id_ref_prj_id` FOREIGN KEY (`tsk_prj_id`) REFERENCES `project` (`prj_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -819,8 +819,8 @@ DROP TABLE IF EXISTS `ticket`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `ticket` (
   `tkt_id` int(6) NOT NULL AUTO_INCREMENT,
-  `tkt_title` varchar(100) NOT NULL,
-  `tkt_description` varchar(2000) DEFAULT NULL,
+  `tkt_title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tkt_description` varchar(2000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tkt_dept_id` int(6) DEFAULT NULL,
   `tkt_pty_id` int(6) NOT NULL,
   `tkt_tkttype_id` int(6) NOT NULL,
@@ -843,7 +843,7 @@ CREATE TABLE `ticket` (
   CONSTRAINT `fk_tkt_sts_id_ref_sts_id` FOREIGN KEY (`tkt_sts_id`) REFERENCES `status` (`sts_id`),
   CONSTRAINT `fk_tkt_svctype_id_ref_svctype_id` FOREIGN KEY (`tkt_svctype_id`) REFERENCES `servicetype` (`svctype_id`),
   CONSTRAINT `fk_tkt_tkttype_id_ref_tkttype_id` FOREIGN KEY (`tkt_tkttype_id`) REFERENCES `tickettype` (`tkttype_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -852,7 +852,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (3,'Need internet conneciton to Personal device','Need internet conneciton to Personal device as per project demand.',1,1,1,1,1,2,'2018-11-02 04:51:28','2019-03-01 12:12:43'),(4,'Unable to connect to VDI','Unable to Connect to clients VDI on wifi.',1,1,2,1,1,3,'2018-11-02 04:51:28','2019-03-02 10:57:59'),(5,'sdfsd','dfs',3,3,1,3,1,5,'2019-02-27 07:47:39','2019-04-03 12:26:55'),(6,'Need extra monitor','Need extra monitor to extend the display from laptop',1,2,1,2,1,4,'2019-02-27 09:28:30','2019-02-27 09:28:30'),(7,'System is performing at the slowest best','Its not working now...',1,2,2,3,1,2,'2019-03-03 11:04:58','2019-03-03 11:04:58'),(8,'Just a sample','klsdjflksdjflsdk',1,3,2,4,1,5,'2019-03-25 12:48:59','2019-03-25 12:48:59'),(9,'Testing the flow','Testing the flow',1,1,1,1,1,5,'2019-03-27 08:30:00','2019-03-26 03:02:53'),(10,'jlkdfsd','',2,4,2,3,1,1,'2019-04-03 12:45:41','2019-04-03 12:45:41');
+INSERT INTO `ticket` VALUES (3,'Need internet conneciton to Personal device','Need internet conneciton to Personal device as per project demand.',1,1,1,1,1,6,'2018-11-02 04:51:28','2019-03-01 12:12:43'),(4,'Unable to connect to VDI','Unable to Connect to clients VDI on wifi.',1,1,2,1,1,3,'2018-11-02 04:51:28','2019-03-02 10:57:59'),(5,'sdfsd','dfs',3,3,1,3,1,5,'2019-02-27 07:47:39','2019-04-03 12:26:55'),(6,'Need extra monitor','Need extra monitor to extend the display from laptop',1,2,1,2,1,4,'2019-02-27 09:28:30','2019-02-27 09:28:30'),(7,'System is performing at the slowest best','Its not working now...',1,2,2,3,1,2,'2019-03-03 11:04:58','2019-03-03 11:04:58'),(8,'Just a sample','klsdjflksdjflsdk',1,3,2,4,1,5,'2019-03-25 12:48:59','2019-03-25 12:48:59'),(9,'Testing the flow','Testing the flow',1,1,1,1,1,5,'2019-03-27 08:30:00','2019-03-26 03:02:53'),(10,'jlkdfsd','',2,4,2,3,3,1,'2019-04-03 12:45:41','2019-04-03 12:45:41'),(11,'Need additional seats for new resources','Need additional seats for new resources due to recruitment',2,1,1,3,4,2,'2019-04-25 02:50:33','2019-04-25 02:50:33'),(12,'Manager Create Ticket Test','Manager Create Ticket Test',1,1,1,1,4,1,'2019-04-25 07:27:06','2019-04-25 07:27:06');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -874,7 +874,7 @@ CREATE TABLE `ticketassignment` (
   KEY `fk_ta_assigned_to_ref_u_id` (`ta_assigned_to`),
   CONSTRAINT `fk_ta_assigned_to_ref_u_id` FOREIGN KEY (`ta_assigned_to`) REFERENCES `user` (`u_id`),
   CONSTRAINT `fk_ta_tkt_id_ref_tkt_id` FOREIGN KEY (`ta_tkt_id`) REFERENCES `ticket` (`tkt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -883,7 +883,7 @@ CREATE TABLE `ticketassignment` (
 
 LOCK TABLES `ticketassignment` WRITE;
 /*!40000 ALTER TABLE `ticketassignment` DISABLE KEYS */;
-INSERT INTO `ticketassignment` VALUES (2,6,2,NULL),(3,6,2,NULL),(4,7,2,NULL),(5,6,2,NULL),(6,6,2,NULL),(7,7,2,NULL),(8,6,2,NULL),(9,6,2,NULL),(10,6,2,NULL),(11,7,2,NULL),(12,6,2,NULL),(13,7,2,NULL),(14,3,2,NULL),(15,5,2,NULL);
+INSERT INTO `ticketassignment` VALUES (2,6,2,'2019-02-27 09:28:30'),(3,6,2,'2019-03-27 09:28:30'),(4,7,2,'2019-03-27 09:28:30'),(5,6,2,'2019-02-28 09:28:30'),(6,6,2,'2018-02-27 09:18:30'),(7,7,2,'2019-04-27 09:28:30'),(8,6,2,'2019-02-27 09:20:30'),(9,6,2,'2018-03-27 09:28:30'),(10,6,2,'2019-04-27 09:28:30'),(11,7,2,'2019-05-27 09:28:30'),(12,6,2,'2019-04-27 08:28:30'),(13,7,2,'2019-06-27 09:28:30'),(14,3,1,'2019-06-27 09:28:30'),(15,5,2,'2019-07-27 09:28:30'),(16,11,2,'2019-08-27 09:28:30');
 /*!40000 ALTER TABLE `ticketassignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -898,7 +898,7 @@ CREATE TABLE `ticketconversation` (
   `tktconv_id` int(6) NOT NULL AUTO_INCREMENT,
   `tktconv_tkt_id` int(6) NOT NULL,
   `tktconv_author` int(6) NOT NULL,
-  `tktconv_message` varchar(500) DEFAULT NULL,
+  `tktconv_message` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tktconv_commented_on` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`tktconv_id`),
   UNIQUE KEY `tktconv_id` (`tktconv_id`),
@@ -906,7 +906,7 @@ CREATE TABLE `ticketconversation` (
   KEY `fk_tktconv_author_ref_u_id` (`tktconv_author`),
   CONSTRAINT `fk_tktconv_author_ref_u_id` FOREIGN KEY (`tktconv_author`) REFERENCES `user` (`u_id`),
   CONSTRAINT `fk_tktconv_tkt_id_ref_tkt_id` FOREIGN KEY (`tktconv_tkt_id`) REFERENCES `ticket` (`tkt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -915,7 +915,7 @@ CREATE TABLE `ticketconversation` (
 
 LOCK TABLES `ticketconversation` WRITE;
 /*!40000 ALTER TABLE `ticketconversation` DISABLE KEYS */;
-INSERT INTO `ticketconversation` VALUES (1,3,1,'Pls provide the RMG and DM approval.Pls provide the RMG and DM approvalPls provide the RMG and DM approvalPls provide the RMG and DM approval.','2018-11-02 04:51:28'),(2,3,2,'Approval provided in the attachment.','2018-11-02 04:51:28'),(3,3,1,'Provided the internet and closed the ticket.','2018-11-02 04:51:28'),(4,3,1,'Updated and closed....','2019-02-13 12:37:17'),(5,3,1,'kljsflksdjflsd','2019-02-15 01:36:39'),(6,3,1,'This is the final test to close','2019-02-24 06:09:26'),(7,3,1,'temporary','2019-02-24 06:25:52'),(8,3,1,'temporary','2019-02-24 06:25:52'),(9,3,1,'dfsdfsd','2019-02-24 06:35:50'),(10,3,1,'kjsdflsjflkd','2019-02-24 06:40:50'),(11,3,1,'jkmkfgf9898fdgldfmgdfl','2019-02-24 06:43:00'),(12,3,1,'Lets see if 3 are down','2019-02-25 11:09:38'),(13,3,1,'Test multiple...','2019-02-25 11:18:31'),(19,3,1,'Fingers crossed','2019-02-25 12:05:39'),(20,3,1,'Test timestamp','2019-02-25 12:22:34'),(21,3,1,'Not yet resolved mate...','2019-03-01 17:42:43'),(22,4,1,'See whats happening...','2019-03-02 16:26:43'),(23,4,1,'Okay. Alright it seems working as expected but need to fix the same at Add Message box as it is hardcoded in the HTTP request.','2019-03-02 16:27:59'),(24,5,1,'The sdsdf is now on the fly..with add message test..','2019-03-02 16:47:15'),(25,6,1,'This is the success message test for adding the message at first time when there is no history.','2019-03-02 16:54:14'),(26,6,1,'This is the add message with attachment. Fingers crossed.','2019-03-02 17:03:30'),(27,5,1,'What is the ETA?','2019-03-03 11:28:19'),(28,7,1,'Yet another mssage','2019-03-15 11:43:34'),(29,5,1,'ALright...','2019-03-15 11:44:18'),(30,3,1,'Yet antoher mesage...','2019-03-15 11:44:48'),(31,9,1,'jsdklfsd','2019-04-03 16:53:03'),(32,5,1,'CLosing now','2019-04-03 17:56:55');
+INSERT INTO `ticketconversation` VALUES (1,3,1,'Pls provide the RMG and DM approval.Pls provide the RMG and DM approvalPls provide the RMG and DM approvalPls provide the RMG and DM approval.','2018-11-02 04:51:28'),(2,3,2,'Approval provided in the attachment.','2018-11-02 04:51:28'),(3,3,1,'Provided the internet and closed the ticket.','2018-11-02 04:51:28'),(4,3,1,'Updated and closed....','2019-02-13 12:37:17'),(5,3,1,'kljsflksdjflsd','2019-02-15 01:36:39'),(6,3,1,'This is the final test to close','2019-02-24 06:09:26'),(7,3,1,'temporary','2019-02-24 06:25:52'),(8,3,1,'temporary','2019-02-24 06:25:52'),(9,3,1,'dfsdfsd','2019-02-24 06:35:50'),(10,3,1,'kjsdflsjflkd','2019-02-24 06:40:50'),(11,3,1,'jkmkfgf9898fdgldfmgdfl','2019-02-24 06:43:00'),(12,3,1,'Lets see if 3 are down','2019-02-25 11:09:38'),(13,3,1,'Test multiple...','2019-02-25 11:18:31'),(19,3,1,'Fingers crossed','2019-02-25 12:05:39'),(20,3,1,'Test timestamp','2019-02-25 12:22:34'),(21,3,1,'Not yet resolved mate...','2019-03-01 17:42:43'),(22,4,1,'See whats happening...','2019-03-02 16:26:43'),(23,4,1,'Okay. Alright it seems working as expected but need to fix the same at Add Message box as it is hardcoded in the HTTP request.','2019-03-02 16:27:59'),(24,5,1,'The sdsdf is now on the fly..with add message test..','2019-03-02 16:47:15'),(25,6,1,'This is the success message test for adding the message at first time when there is no history.','2019-03-02 16:54:14'),(26,6,1,'This is the add message with attachment. Fingers crossed.','2019-03-02 17:03:30'),(27,5,1,'What is the ETA?','2019-03-03 11:28:19'),(28,7,1,'Yet another mssage','2019-03-15 11:43:34'),(29,5,1,'ALright...','2019-03-15 11:44:18'),(30,3,1,'Yet antoher mesage...','2019-03-15 11:44:48'),(31,9,1,'jsdklfsd','2019-04-03 16:53:03'),(32,5,1,'CLosing now','2019-04-03 17:56:55'),(33,3,1,'Updating to check if modified updateTicket code is working fine','2019-04-25 06:30:01'),(34,3,1,'Testing for ticketid10','2019-04-25 07:06:36'),(35,10,1,'Testing for ticket id in state','2019-04-25 07:11:13'),(36,10,1,'Yet another time to test the change of id properly...','2019-04-25 07:16:20'),(37,4,1,'Now it should update for Ticket id 4','2019-04-25 07:16:56'),(38,10,3,'Han is updating it now...','2019-04-25 08:12:56'),(39,11,4,'Pls see if this can be done at the earliset','2019-04-25 08:20:50'),(40,11,4,'Now it should still show the success alert.','2019-04-25 09:22:33'),(41,11,4,'Testing the loading screen','2019-04-25 10:05:13'),(42,11,4,'The refactored code is now does not show the success alert.','2019-04-25 10:41:50'),(43,11,4,'Exclusive switches are in place. This should fix the ON and OFF issue.','2019-04-25 10:54:57'),(44,11,4,'Random fix...','2019-04-25 10:59:40'),(45,11,4,'Testing back if as usual.','2019-04-25 12:09:30'),(46,12,4,'Test','2019-04-29 16:08:21'),(47,12,4,'Test','2019-04-29 16:08:24');
 /*!40000 ALTER TABLE `ticketconversation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -928,11 +928,11 @@ DROP TABLE IF EXISTS `tickettype`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `tickettype` (
   `tkttype_id` int(6) NOT NULL,
-  `tkttype_name` varchar(75) NOT NULL,
+  `tkttype_name` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`tkttype_id`),
   UNIQUE KEY `tkttype_id` (`tkttype_id`),
   UNIQUE KEY `tkttype_name` (`tkttype_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -959,14 +959,14 @@ CREATE TABLE `timesheet` (
   `tmesht_date` date NOT NULL,
   `tmesht_start_time` time NOT NULL,
   `tmesht_end_time` time NOT NULL,
-  `tmesht_status` varchar(20) DEFAULT NULL,
+  `tmesht_status` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`tmesht_id`),
   UNIQUE KEY `tmesht_id` (`tmesht_id`),
   KEY `fk_tmesht_emp_id_ref_emp_id` (`tmesht_emp_id`),
   KEY `fk_tmesht_tsk_id_ref_tsk_id` (`tmesht_tsk_id`),
   CONSTRAINT `fk_tmesht_emp_id_ref_emp_id` FOREIGN KEY (`tmesht_emp_id`) REFERENCES `employee` (`emp_id`),
   CONSTRAINT `fk_tmesht_tsk_id_ref_tsk_id` FOREIGN KEY (`tmesht_tsk_id`) REFERENCES `task` (`tsk_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -990,14 +990,14 @@ CREATE TABLE `timesheetapproval` (
   `tsa_id` int(6) NOT NULL AUTO_INCREMENT,
   `tsa_tmesht_id` int(6) NOT NULL,
   `tsa_approver_emp_id` int(6) NOT NULL,
-  `tsa_status` varchar(20) DEFAULT NULL,
+  `tsa_status` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`tsa_id`),
   UNIQUE KEY `tsa_id` (`tsa_id`),
   KEY `fk_tsa_tmesht_id_ref_tmesht_id` (`tsa_tmesht_id`),
   KEY `fk_tsa_approver_emp_id_ref_emp_id` (`tsa_approver_emp_id`),
   CONSTRAINT `fk_tsa_approver_emp_id_ref_emp_id` FOREIGN KEY (`tsa_approver_emp_id`) REFERENCES `employee` (`emp_id`),
   CONSTRAINT `fk_tsa_tmesht_id_ref_tmesht_id` FOREIGN KEY (`tsa_tmesht_id`) REFERENCES `timesheet` (`tmesht_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1019,11 +1019,11 @@ DROP TABLE IF EXISTS `timesheetstatuscodes`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `timesheetstatuscodes` (
   `tssc_code` int(2) NOT NULL,
-  `tssc_name` varchar(45) DEFAULT NULL,
-  `tssc_desc` varchar(45) DEFAULT NULL,
+  `tssc_name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tssc_desc` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`tssc_code`),
   UNIQUE KEY `tssc_code` (`tssc_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1053,7 +1053,7 @@ CREATE TABLE `tktconvattachment` (
   KEY `fk_tca_ihda_id_ref_ihda_id` (`tca_ihda_id`),
   CONSTRAINT `fk_tca_ihda_id_ref_ihda_id` FOREIGN KEY (`tca_ihda_id`) REFERENCES `itshelpdeskattachment` (`ihda_id`),
   CONSTRAINT `fk_tca_tktconv_id_ref_tktconv_id` FOREIGN KEY (`tca_tktconv_id`) REFERENCES `ticketconversation` (`tktconv_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1075,11 +1075,11 @@ DROP TABLE IF EXISTS `user`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
   `u_id` int(6) NOT NULL AUTO_INCREMENT,
-  `u_username` varchar(20) NOT NULL,
+  `u_username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `u_id` (`u_id`),
   UNIQUE KEY `u_username` (`u_username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1088,7 +1088,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'erin'),(1,'mike');
+INSERT INTO `user` VALUES (2,'erin'),(3,'han'),(1,'mike'),(4,'sandra');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1130,6 +1130,19 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `viewticketsassignedtouser`
+--
+
+DROP TABLE IF EXISTS `viewticketsassignedtouser`;
+/*!50001 DROP VIEW IF EXISTS `viewticketsassignedtouser`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `viewticketsassignedtouser` AS SELECT 
+ 1 AS `tatu_tkt_id`,
+ 1 AS `tatu_assigned_to`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary view structure for view `viewticketsbymonthandstatus`
 --
 
@@ -1156,7 +1169,7 @@ SET character_set_client = @saved_cs_client;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -1180,7 +1193,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -1244,7 +1257,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `viewclosedticketsinlasthour` AS select count(0) AS `closed_ticket_count_last_hour` from `ticket` where ((`ticket`.`tkt_sts_id` = 3) and (`ticket`.`tkt_updated_date` between (utc_timestamp() - interval 60 minute) and utc_timestamp())) */;
@@ -1262,7 +1275,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `viewdepartmentwiseworkload` AS select count(0) AS `ticket_count`,`department`.`dept_name` AS `dept_name` from (`ticket` join `department` on((`ticket`.`tkt_dept_id` = `department`.`dept_id`))) group by `department`.`dept_id` */;
@@ -1280,10 +1293,28 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `viewnewticketsinlasthour` AS select count(0) AS `new_ticket_count_last_hour` from `ticket` where ((`ticket`.`tkt_sts_id` = 5) and (`ticket`.`tkt_created_date` between (utc_timestamp() - interval 60 minute) and utc_timestamp())) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `viewticketsassignedtouser`
+--
+
+/*!50001 DROP VIEW IF EXISTS `viewticketsassignedtouser`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `viewticketsassignedtouser` AS select `a`.`ta_tkt_id` AS `tatu_tkt_id`,`a`.`ta_assigned_to` AS `tatu_assigned_to` from (`pmapinew`.`ticketassignment` `a` join (select `pmapinew`.`ticketassignment`.`ta_tkt_id` AS `ticketId`,max(`pmapinew`.`ticketassignment`.`ta_created_date`) AS `latest_assigned_date` from `pmapinew`.`ticketassignment` group by `pmapinew`.`ticketassignment`.`ta_tkt_id`) `b` on((`a`.`ta_tkt_id` = `b`.`ticketId`))) where (`a`.`ta_created_date` = `b`.`latest_assigned_date`) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1298,7 +1329,7 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `viewticketsbymonthandstatus` AS select `status`.`sts_name` AS `sts_name`,last_day(`ticket`.`tkt_created_date`) AS `last_day_of_month`,count(0) AS `tkt_count` from (`ticket` join `status` on((`status`.`sts_id` = `ticket`.`tkt_sts_id`))) group by `status`.`sts_name`,`last_day_of_month` */;
@@ -1315,4 +1346,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-15 16:07:02
+-- Dump completed on 2019-05-03 15:10:13
