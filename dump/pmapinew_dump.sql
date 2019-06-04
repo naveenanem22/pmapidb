@@ -518,7 +518,7 @@ CREATE TABLE `itshelpdeskattachment` (
   PRIMARY KEY (`ihda_id`),
   UNIQUE KEY `ihda_id` (`ihda_id`),
   UNIQUE KEY `ihda_name` (`ihda_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -527,7 +527,7 @@ CREATE TABLE `itshelpdeskattachment` (
 
 LOCK TABLES `itshelpdeskattachment` WRITE;
 /*!40000 ALTER TABLE `itshelpdeskattachment` DISABLE KEYS */;
-INSERT INTO `itshelpdeskattachment` VALUES (11,'80C-House_Princ_HL-Provisional-2018-2019.pdf'),(12,'HL-Provisional-2018-2019.pdf'),(13,'Huntington_Issues.txt'),(14,'IT_Report.pdf');
+INSERT INTO `itshelpdeskattachment` VALUES (11,'80C-House_Princ_HL-Provisional-2018-2019.pdf'),(12,'HL-Provisional-2018-2019.pdf'),(15,'hlintcertificate_navarum.pdf'),(16,'homeloancertificate_96154558.pdf'),(13,'Huntington_Issues.txt'),(14,'IT_Report.pdf');
 /*!40000 ALTER TABLE `itshelpdeskattachment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -855,6 +855,7 @@ CREATE TABLE `ticket` (
   `tkt_sts_id` int(6) NOT NULL,
   `tkt_created_date` timestamp NULL DEFAULT NULL,
   `tkt_updated_date` timestamp NULL DEFAULT NULL,
+  `tkt_updated_by` int(6) DEFAULT NULL,
   PRIMARY KEY (`tkt_id`),
   UNIQUE KEY `tkt_id` (`tkt_id`),
   KEY `fk_tkt_dept_id_ref_dept_id` (`tkt_dept_id`),
@@ -863,13 +864,15 @@ CREATE TABLE `ticket` (
   KEY `fk_tkt_tkttype_id_ref_tkttype_id` (`tkt_tkttype_id`),
   KEY `fk_tkt_sts_id_ref_sts_id` (`tkt_sts_id`),
   KEY `fk_tkt_created_by_ref_u_id` (`tkt_created_by`),
+  KEY `fk_tkt_updated_by_ref_u_id_idx` (`tkt_updated_by`),
   CONSTRAINT `fk_tkt_created_by_ref_u_id` FOREIGN KEY (`tkt_created_by`) REFERENCES `user` (`u_id`),
   CONSTRAINT `fk_tkt_dept_id_ref_dept_id` FOREIGN KEY (`tkt_dept_id`) REFERENCES `department` (`dept_id`),
   CONSTRAINT `fk_tkt_pty_id_ref_pty_id` FOREIGN KEY (`tkt_pty_id`) REFERENCES `priority` (`pty_id`),
   CONSTRAINT `fk_tkt_sts_id_ref_sts_id` FOREIGN KEY (`tkt_sts_id`) REFERENCES `status` (`sts_id`),
   CONSTRAINT `fk_tkt_svctype_id_ref_svctype_id` FOREIGN KEY (`tkt_svctype_id`) REFERENCES `servicetype` (`svctype_id`),
-  CONSTRAINT `fk_tkt_tkttype_id_ref_tkttype_id` FOREIGN KEY (`tkt_tkttype_id`) REFERENCES `tickettype` (`tkttype_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `fk_tkt_tkttype_id_ref_tkttype_id` FOREIGN KEY (`tkt_tkttype_id`) REFERENCES `tickettype` (`tkttype_id`),
+  CONSTRAINT `fk_tkt_updated_by_ref_u_id` FOREIGN KEY (`tkt_updated_by`) REFERENCES `user` (`u_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -878,7 +881,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (3,'Need internet conneciton to Personal device','Need internet conneciton to Personal device as per project demand.',1,1,1,1,1,6,'2018-11-02 04:51:28','2019-03-01 12:12:43'),(4,'Unable to connect to VDI','Unable to Connect to clients VDI on wifi.',1,1,2,1,1,3,'2018-11-02 04:51:28','2019-03-02 10:57:59'),(5,'sdfsd','dfs',3,3,1,3,1,5,'2019-02-27 07:47:39','2019-04-03 12:26:55'),(6,'Need extra monitor','Need extra monitor to extend the display from laptop',1,2,1,2,1,4,'2019-02-27 09:28:30','2019-02-27 09:28:30'),(7,'System is performing at the slowest best','Its not working now...',1,2,2,3,1,2,'2019-03-03 11:04:58','2019-03-03 11:04:58'),(8,'Just a sample','klsdjflksdjflsdk',1,3,2,4,1,5,'2019-03-25 12:48:59','2019-03-25 12:48:59'),(9,'Testing the flow','Testing the flow',1,1,1,1,1,5,'2019-03-27 08:30:00','2019-03-26 03:02:53'),(10,'jlkdfsd','',2,4,2,3,3,1,'2019-04-03 12:45:41','2019-04-03 12:45:41'),(11,'Need additional seats for new resources','Need additional seats for new resources due to recruitment',2,1,1,3,4,2,'2019-04-25 02:50:33','2019-04-25 02:50:33'),(12,'Manager Create Ticket Test','Manager Create Ticket Test',1,1,1,1,4,1,'2019-04-25 07:27:06','2019-04-25 07:27:06'),(13,'Create Ticket Form UI In Progress','Create Ticket Form UI In Progress',1,1,1,1,3,1,'2019-05-03 06:20:21','2019-05-03 06:20:21'),(14,'Toggle testing New Ticket','The test is to check if the Success or Failure alert not displaying during Fresh New Ticket Form.',2,4,1,2,3,1,'2019-05-03 12:43:50','2019-05-03 12:43:50'),(15,'Test for dismiss alert to navigate to MyTickets','Test for dismiss alert to navigate to MyTickets',1,1,2,2,3,5,'2019-05-03 12:47:18','2019-05-05 01:15:27'),(16,'Create Ticket Form UI In Progresssss','Create Ticket Form UI In Progresssss',1,2,1,2,3,1,'2019-05-05 02:51:06','2019-05-05 02:51:06'),(17,'Testing the reaload','Testing the reaload',2,1,2,1,3,1,'2019-05-05 02:52:38','2019-05-05 02:52:38'),(18,'Trying reload','Trying reload',2,4,1,2,3,1,'2019-05-05 02:56:25','2019-05-05 02:56:25'),(19,'Fixed reload my tickets','Fixed reload my tickets',1,4,2,4,3,1,'2019-05-05 02:58:21','2019-05-05 02:58:21'),(20,'Create Ticket Form UI In Progress','New ticket for mousenot working',1,1,1,3,3,1,'2019-05-17 00:00:33','2019-05-17 00:00:33'),(21,'Need new laptop','Need new laptop',2,4,2,2,4,1,'2019-05-20 04:20:36','2019-05-20 04:20:36');
+INSERT INTO `ticket` VALUES (3,'Need internet conneciton to Personal device','Need internet conneciton to Personal device as per project demand.',1,1,1,1,1,6,'2018-11-02 04:51:28','2019-03-01 12:12:43',1),(4,'Unable to connect to VDI','Unable to Connect to clients VDI on wifi.',1,1,2,1,1,3,'2018-11-02 04:51:28','2019-03-02 10:57:59',4),(5,'sdfsd','dfs',3,3,1,3,1,5,'2019-02-27 07:47:39','2019-04-03 12:26:55',3),(6,'Need extra monitor','Need extra monitor to extend the display from laptop',1,2,1,2,1,4,'2019-02-27 09:28:30','2019-02-27 09:28:30',1),(7,'System is performing at the slowest best','Its not working now...',1,2,2,3,1,2,'2019-03-03 11:04:58','2019-03-03 11:04:58',4),(8,'Just a sample','klsdjflksdjflsdk',1,3,2,4,1,5,'2019-03-25 12:48:59','2019-03-25 12:48:59',3),(9,'Testing the flow','Testing the flow',1,1,1,1,1,5,'2019-03-27 08:30:00','2019-03-26 03:02:53',1),(10,'jlkdfsd','',2,4,2,3,3,5,'2019-04-03 12:45:41','2019-06-01 12:00:16',4),(11,'Need additional seats for new resources','Need additional seats for new resources due to recruitment',2,1,1,3,4,2,'2019-04-25 02:50:33','2019-04-25 02:50:33',3),(12,'Manager Create Ticket Test','Manager Create Ticket Test',1,1,1,1,4,2,'2019-04-25 07:27:06','2019-05-26 23:50:08',1),(13,'Create Ticket Form UI In Progress','Create Ticket Form UI In Progress',1,1,1,1,3,2,'2019-05-03 06:20:21','2019-05-27 00:04:08',4),(14,'Toggle testing New Ticket','The test is to check if the Success or Failure alert not displaying during Fresh New Ticket Form.',2,4,1,2,3,2,'2019-05-03 12:43:50','2019-05-27 00:39:39',3),(15,'Test for dismiss alert to navigate to MyTickets','Test for dismiss alert to navigate to MyTickets',1,1,2,2,3,5,'2019-05-03 12:47:18','2019-05-05 01:15:27',1),(16,'Create Ticket Form UI In Progresssss','Create Ticket Form UI In Progresssss',1,2,1,2,3,5,'2019-05-05 02:51:06','2019-06-01 22:42:02',1),(17,'Testing the reaload','Testing the reaload',2,1,2,1,3,2,'2019-05-05 02:52:38','2019-05-30 03:34:51',4),(18,'Trying reload','Trying reload',2,4,1,2,3,2,'2019-05-05 02:56:25','2019-05-30 23:16:44',3),(19,'Fixed reload my tickets','Fixed reload my tickets',1,4,2,4,3,2,'2019-05-05 02:58:21','2019-05-31 00:12:47',1),(20,'Create Ticket Form UI In Progress','New ticket for mousenot working',1,1,1,3,3,1,'2019-05-17 00:00:33','2019-05-30 00:25:23',4),(21,'Need new laptop','Need new laptop',2,4,2,2,4,1,'2019-05-20 04:20:36','2019-05-30 00:34:44',3),(22,'Ticket to check if On and Off Success Alert','Testing to see if Success alert is visible',2,2,2,3,4,2,'2019-05-30 07:49:57','2019-05-30 07:50:37',1),(23,'Verify the changes from Manager role','Verify the changes from Manager role as well. To ensure that the changes done in manager section are reflected in here.',3,4,2,3,3,1,'2019-05-31 22:31:43','2019-05-31 22:31:43',NULL);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -900,7 +903,7 @@ CREATE TABLE `ticketassignment` (
   KEY `fk_ta_assigned_to_ref_u_id` (`ta_assigned_to`),
   CONSTRAINT `fk_ta_assigned_to_ref_u_id` FOREIGN KEY (`ta_assigned_to`) REFERENCES `user` (`u_id`),
   CONSTRAINT `fk_ta_tkt_id_ref_tkt_id` FOREIGN KEY (`ta_tkt_id`) REFERENCES `ticket` (`tkt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -909,7 +912,7 @@ CREATE TABLE `ticketassignment` (
 
 LOCK TABLES `ticketassignment` WRITE;
 /*!40000 ALTER TABLE `ticketassignment` DISABLE KEYS */;
-INSERT INTO `ticketassignment` VALUES (2,6,2,'2019-02-27 09:28:30'),(3,6,2,'2019-03-27 09:28:30'),(4,7,2,'2019-03-27 09:28:30'),(5,6,2,'2019-02-28 09:28:30'),(6,6,2,'2018-02-27 09:18:30'),(7,7,2,'2019-04-27 09:28:30'),(8,6,2,'2019-02-27 09:20:30'),(9,6,2,'2018-03-27 09:28:30'),(10,6,2,'2019-04-27 09:28:30'),(11,7,2,'2019-05-27 09:28:30'),(12,6,2,'2019-04-27 08:28:30'),(13,7,2,'2019-06-27 09:28:30'),(14,3,1,'2019-06-27 09:28:30'),(15,5,2,'2019-07-27 09:28:30'),(16,11,2,'2019-08-27 09:28:30'),(17,14,1,'2019-08-27 09:28:30');
+INSERT INTO `ticketassignment` VALUES (2,6,2,'2019-02-27 09:28:30'),(3,6,2,'2019-03-27 09:28:30'),(4,7,2,'2019-03-27 09:28:30'),(5,6,2,'2019-02-28 09:28:30'),(6,6,2,'2018-02-27 09:18:30'),(7,7,2,'2019-04-27 09:28:30'),(8,6,2,'2019-02-27 09:20:30'),(9,6,2,'2018-03-27 09:28:30'),(10,6,2,'2019-04-27 09:28:30'),(11,7,2,'2019-05-27 09:28:30'),(12,6,2,'2019-04-27 08:28:30'),(13,7,2,'2019-06-27 09:28:30'),(14,3,1,'2019-06-27 09:28:30'),(15,5,2,'2019-07-27 09:28:30'),(16,11,2,'2019-08-27 09:28:30'),(17,14,1,'2019-08-27 09:28:30'),(21,10,1,NULL),(22,12,1,NULL),(23,13,1,NULL),(24,14,1,NULL),(25,16,1,NULL),(26,17,1,NULL),(27,18,1,NULL),(28,20,1,NULL),(29,19,1,NULL),(30,21,1,NULL),(31,19,1,NULL),(32,17,1,NULL),(33,18,1,NULL),(34,19,1,NULL),(35,21,1,NULL),(36,20,1,NULL),(37,16,1,NULL),(38,17,1,NULL),(39,18,1,NULL),(40,19,1,NULL),(41,20,1,NULL),(42,21,1,NULL),(43,16,1,NULL),(44,18,1,NULL),(45,17,1,NULL),(46,20,1,NULL),(47,19,1,NULL),(48,21,1,NULL),(49,18,1,NULL),(50,19,1,NULL),(51,20,1,NULL),(52,21,1,NULL),(53,17,1,NULL),(54,22,1,NULL),(55,18,1,NULL),(56,19,1,NULL);
 /*!40000 ALTER TABLE `ticketassignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -932,7 +935,7 @@ CREATE TABLE `ticketconversation` (
   KEY `fk_tktconv_author_ref_u_id` (`tktconv_author`),
   CONSTRAINT `fk_tktconv_author_ref_u_id` FOREIGN KEY (`tktconv_author`) REFERENCES `user` (`u_id`),
   CONSTRAINT `fk_tktconv_tkt_id_ref_tkt_id` FOREIGN KEY (`tktconv_tkt_id`) REFERENCES `ticket` (`tkt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -941,7 +944,7 @@ CREATE TABLE `ticketconversation` (
 
 LOCK TABLES `ticketconversation` WRITE;
 /*!40000 ALTER TABLE `ticketconversation` DISABLE KEYS */;
-INSERT INTO `ticketconversation` VALUES (1,3,1,'Pls provide the RMG and DM approval.Pls provide the RMG and DM approvalPls provide the RMG and DM approvalPls provide the RMG and DM approval.','2018-11-02 04:51:28'),(2,3,2,'Approval provided in the attachment.','2018-11-02 04:51:28'),(3,3,1,'Provided the internet and closed the ticket.','2018-11-02 04:51:28'),(4,3,1,'Updated and closed....','2019-02-13 12:37:17'),(5,3,1,'kljsflksdjflsd','2019-02-15 01:36:39'),(6,3,1,'This is the final test to close','2019-02-24 06:09:26'),(7,3,1,'temporary','2019-02-24 06:25:52'),(8,3,1,'temporary','2019-02-24 06:25:52'),(9,3,1,'dfsdfsd','2019-02-24 06:35:50'),(10,3,1,'kjsdflsjflkd','2019-02-24 06:40:50'),(11,3,1,'jkmkfgf9898fdgldfmgdfl','2019-02-24 06:43:00'),(12,3,1,'Lets see if 3 are down','2019-02-25 11:09:38'),(13,3,1,'Test multiple...','2019-02-25 11:18:31'),(19,3,1,'Fingers crossed','2019-02-25 12:05:39'),(20,3,1,'Test timestamp','2019-02-25 12:22:34'),(21,3,1,'Not yet resolved mate...','2019-03-01 17:42:43'),(22,4,1,'See whats happening...','2019-03-02 16:26:43'),(23,4,1,'Okay. Alright it seems working as expected but need to fix the same at Add Message box as it is hardcoded in the HTTP request.','2019-03-02 16:27:59'),(24,5,1,'The sdsdf is now on the fly..with add message test..','2019-03-02 16:47:15'),(25,6,1,'This is the success message test for adding the message at first time when there is no history.','2019-03-02 16:54:14'),(26,6,1,'This is the add message with attachment. Fingers crossed.','2019-03-02 17:03:30'),(27,5,1,'What is the ETA?','2019-03-03 11:28:19'),(28,7,1,'Yet another mssage','2019-03-15 11:43:34'),(29,5,1,'ALright...','2019-03-15 11:44:18'),(30,3,1,'Yet antoher mesage...','2019-03-15 11:44:48'),(31,9,1,'jsdklfsd','2019-04-03 16:53:03'),(32,5,1,'CLosing now','2019-04-03 17:56:55'),(33,3,1,'Updating to check if modified updateTicket code is working fine','2019-04-25 06:30:01'),(34,3,1,'Testing for ticketid10','2019-04-25 07:06:36'),(35,10,1,'Testing for ticket id in state','2019-04-25 07:11:13'),(36,10,1,'Yet another time to test the change of id properly...','2019-04-25 07:16:20'),(37,4,1,'Now it should update for Ticket id 4','2019-04-25 07:16:56'),(38,10,3,'Han is updating it now...','2019-04-25 08:12:56'),(39,11,4,'Pls see if this can be done at the earliset','2019-04-25 08:20:50'),(40,11,4,'Now it should still show the success alert.','2019-04-25 09:22:33'),(41,11,4,'Testing the loading screen','2019-04-25 10:05:13'),(42,11,4,'The refactored code is now does not show the success alert.','2019-04-25 10:41:50'),(43,11,4,'Exclusive switches are in place. This should fix the ON and OFF issue.','2019-04-25 10:54:57'),(44,11,4,'Random fix...','2019-04-25 10:59:40'),(45,11,4,'Testing back if as usual.','2019-04-25 12:09:30'),(46,12,4,'Test','2019-04-29 16:08:21'),(47,12,4,'Test','2019-04-29 16:08:24'),(48,14,3,'Test adding message.','2019-05-05 04:25:00'),(49,14,3,'Adding yet another message...','2019-05-05 04:25:20'),(50,14,3,'Now checking if access is denied.','2019-05-05 05:58:41'),(51,13,3,'Checking the add','2019-05-05 06:04:53'),(52,15,3,'Closing the ticket now.','2019-05-05 06:45:27');
+INSERT INTO `ticketconversation` VALUES (1,3,1,'Pls provide the RMG and DM approval.Pls provide the RMG and DM approvalPls provide the RMG and DM approvalPls provide the RMG and DM approval.','2018-11-02 04:51:28'),(2,3,2,'Approval provided in the attachment.','2018-11-02 04:51:28'),(3,3,1,'Provided the internet and closed the ticket.','2018-11-02 04:51:28'),(4,3,1,'Updated and closed....','2019-02-13 12:37:17'),(5,3,1,'kljsflksdjflsd','2019-02-15 01:36:39'),(6,3,1,'This is the final test to close','2019-02-24 06:09:26'),(7,3,1,'temporary','2019-02-24 06:25:52'),(8,3,1,'temporary','2019-02-24 06:25:52'),(9,3,1,'dfsdfsd','2019-02-24 06:35:50'),(10,3,1,'kjsdflsjflkd','2019-02-24 06:40:50'),(11,3,1,'jkmkfgf9898fdgldfmgdfl','2019-02-24 06:43:00'),(12,3,1,'Lets see if 3 are down','2019-02-25 11:09:38'),(13,3,1,'Test multiple...','2019-02-25 11:18:31'),(19,3,1,'Fingers crossed','2019-02-25 12:05:39'),(20,3,1,'Test timestamp','2019-02-25 12:22:34'),(21,3,1,'Not yet resolved mate...','2019-03-01 17:42:43'),(22,4,1,'See whats happening...','2019-03-02 16:26:43'),(23,4,1,'Okay. Alright it seems working as expected but need to fix the same at Add Message box as it is hardcoded in the HTTP request.','2019-03-02 16:27:59'),(24,5,1,'The sdsdf is now on the fly..with add message test..','2019-03-02 16:47:15'),(25,6,1,'This is the success message test for adding the message at first time when there is no history.','2019-03-02 16:54:14'),(26,6,1,'This is the add message with attachment. Fingers crossed.','2019-03-02 17:03:30'),(27,5,1,'What is the ETA?','2019-03-03 11:28:19'),(28,7,1,'Yet another mssage','2019-03-15 11:43:34'),(29,5,1,'ALright...','2019-03-15 11:44:18'),(30,3,1,'Yet antoher mesage...','2019-03-15 11:44:48'),(31,9,1,'jsdklfsd','2019-04-03 16:53:03'),(32,5,1,'CLosing now','2019-04-03 17:56:55'),(33,3,1,'Updating to check if modified updateTicket code is working fine','2019-04-25 06:30:01'),(34,3,1,'Testing for ticketid10','2019-04-25 07:06:36'),(35,10,1,'Testing for ticket id in state','2019-04-25 07:11:13'),(36,10,1,'Yet another time to test the change of id properly...','2019-04-25 07:16:20'),(37,4,1,'Now it should update for Ticket id 4','2019-04-25 07:16:56'),(38,10,3,'Han is updating it now...','2019-04-25 08:12:56'),(39,11,4,'Pls see if this can be done at the earliset','2019-04-25 08:20:50'),(40,11,4,'Now it should still show the success alert.','2019-04-25 09:22:33'),(41,11,4,'Testing the loading screen','2019-04-25 10:05:13'),(42,11,4,'The refactored code is now does not show the success alert.','2019-04-25 10:41:50'),(43,11,4,'Exclusive switches are in place. This should fix the ON and OFF issue.','2019-04-25 10:54:57'),(44,11,4,'Random fix...','2019-04-25 10:59:40'),(45,11,4,'Testing back if as usual.','2019-04-25 12:09:30'),(46,12,4,'Test','2019-04-29 16:08:21'),(47,12,4,'Test','2019-04-29 16:08:24'),(48,14,3,'Test adding message.','2019-05-05 04:25:00'),(49,14,3,'Adding yet another message...','2019-05-05 04:25:20'),(50,14,3,'Now checking if access is denied.','2019-05-05 05:58:41'),(51,13,3,'Checking the add','2019-05-05 06:04:53'),(52,15,3,'Closing the ticket now.','2019-05-05 06:45:27'),(53,15,3,'Is it still working, the add message.','2019-06-01 04:06:08'),(54,10,3,'Test now','2019-06-01 17:00:25'),(55,10,3,'Another test','2019-06-01 17:30:16'),(56,19,3,'Adding a message to fix the reload my tickets. This should result in Success.','2019-06-02 03:44:17'),(57,16,3,'Closing now.','2019-06-02 04:12:02'),(58,14,3,'Attaching further documentation.','2019-06-02 09:21:05');
 /*!40000 ALTER TABLE `ticketconversation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1079,7 +1082,7 @@ CREATE TABLE `tktconvattachment` (
   KEY `fk_tca_ihda_id_ref_ihda_id` (`tca_ihda_id`),
   CONSTRAINT `fk_tca_ihda_id_ref_ihda_id` FOREIGN KEY (`tca_ihda_id`) REFERENCES `itshelpdeskattachment` (`ihda_id`),
   CONSTRAINT `fk_tca_tktconv_id_ref_tktconv_id` FOREIGN KEY (`tca_tktconv_id`) REFERENCES `ticketconversation` (`tktconv_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1088,7 +1091,7 @@ CREATE TABLE `tktconvattachment` (
 
 LOCK TABLES `tktconvattachment` WRITE;
 /*!40000 ALTER TABLE `tktconvattachment` DISABLE KEYS */;
-INSERT INTO `tktconvattachment` VALUES (1,19,11),(2,19,12),(3,21,13),(4,26,14);
+INSERT INTO `tktconvattachment` VALUES (1,19,11),(2,19,12),(3,21,13),(4,26,14),(5,58,15),(6,58,16);
 /*!40000 ALTER TABLE `tktconvattachment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1116,6 +1119,38 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES (5,'ablakey'),(7,'ejones'),(2,'erin'),(3,'han'),(6,'jcobb'),(1,'mike'),(8,'mroach'),(4,'sandra'),(9,'twilliams');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `useremployee`
+--
+
+DROP TABLE IF EXISTS `useremployee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `useremployee` (
+  `ue_id` int(6) NOT NULL AUTO_INCREMENT,
+  `ue_u_id` int(6) NOT NULL,
+  `ue_emp_id` int(6) NOT NULL,
+  `ue_created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ue_updated_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`ue_id`),
+  UNIQUE KEY `ue_id` (`ue_id`),
+  UNIQUE KEY `ue_u_id` (`ue_u_id`),
+  UNIQUE KEY `ue_emp_id` (`ue_emp_id`),
+  CONSTRAINT `fk_ue_emp_id_ref_emp_id` FOREIGN KEY (`ue_emp_id`) REFERENCES `employee` (`emp_id`),
+  CONSTRAINT `fk_ue_u_id_ref_u_id` FOREIGN KEY (`ue_u_id`) REFERENCES `user` (`u_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `useremployee`
+--
+
+LOCK TABLES `useremployee` WRITE;
+/*!40000 ALTER TABLE `useremployee` DISABLE KEYS */;
+INSERT INTO `useremployee` VALUES (1,3,112234,'2018-11-02 04:51:28','2018-11-02 04:51:28'),(2,4,123121,'2018-11-02 04:51:28','2018-11-02 04:51:28'),(3,1,123456,'2018-11-02 04:51:28','2018-11-02 04:51:28');
+/*!40000 ALTER TABLE `useremployee` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1404,4 +1439,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-21 10:59:40
+-- Dump completed on 2019-06-04 15:42:39
