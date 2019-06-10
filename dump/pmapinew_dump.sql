@@ -258,7 +258,7 @@ CREATE TABLE `employeeaddress` (
   KEY `fk_empaddr_emp_id_ref_emp_id` (`empaddr_emp_id`),
   CONSTRAINT `fk_empaddr_emp_id_ref_emp_id` FOREIGN KEY (`empaddr_emp_id`) REFERENCES `employee` (`emp_id`),
   CONSTRAINT `fk_empaddr_paddr_id_ref_paddr_id` FOREIGN KEY (`empaddr_ia_id`) REFERENCES `individualaddress` (`ia_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,8 +267,42 @@ CREATE TABLE `employeeaddress` (
 
 LOCK TABLES `employeeaddress` WRITE;
 /*!40000 ALTER TABLE `employeeaddress` DISABLE KEYS */;
-INSERT INTO `employeeaddress` VALUES (2,2,123456);
+INSERT INTO `employeeaddress` VALUES (2,2,123456),(3,2,112234);
 /*!40000 ALTER TABLE `employeeaddress` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employeecontact`
+--
+
+DROP TABLE IF EXISTS `employeecontact`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `employeecontact` (
+  `ec_id` int(6) NOT NULL AUTO_INCREMENT,
+  `ec_emp_id` int(6) DEFAULT NULL,
+  `ec_home_phone` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ec_home_phone_country_code` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ec_primary_mobile_phone` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ec_primary_mobile_phone_country_code` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ec_secondary_mobile_phone` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ec_secondary_mobile_phone_country_code` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ec_office_phone` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ec_office_phone_country_code` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`ec_id`),
+  UNIQUE KEY `ec_emp_id_UNIQUE` (`ec_emp_id`),
+  CONSTRAINT `fk_ec_emp_id_ref_emp_id` FOREIGN KEY (`ec_emp_id`) REFERENCES `employee` (`emp_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employeecontact`
+--
+
+LOCK TABLES `employeecontact` WRITE;
+/*!40000 ALTER TABLE `employeecontact` DISABLE KEYS */;
+INSERT INTO `employeecontact` VALUES (1,112234,'4044998161','91','7788994413','91','7382109811','91',NULL,NULL);
+/*!40000 ALTER TABLE `employeecontact` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1439,4 +1473,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-04 15:42:39
+-- Dump completed on 2019-06-10 13:38:15
